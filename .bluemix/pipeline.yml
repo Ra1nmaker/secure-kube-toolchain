@@ -180,7 +180,7 @@ stages:
     value: ${PROD_CLUSTER_NAMESPACE}
     type: text
   - name: DEPLOYMENT_FILE
-    value: deployment.yml
+    value: ./kubernetes/deployment.yaml
     type: text
   - name: APP_URL
     value: undefined
@@ -205,6 +205,7 @@ stages:
 
       # This script checks the IBM Container Service cluster is ready, has a namespace configured with access to the private
       # image registry (using an IBM Cloud API Key), perform a kubectl deploy of container image and check on outcome.
+      sed -i "s/__NAMESPACE__/${CLUSTER_NAMESPACE}/g" ./kubernetes/deployment.yaml
       source <(curl -sSL "https://raw.githubusercontent.com/open-toolchain/commons/master/scripts/check_and_deploy_kubectl.sh")
   - name: Check health
     type: deployer
