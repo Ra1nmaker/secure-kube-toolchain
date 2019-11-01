@@ -180,7 +180,10 @@ stages:
     value: ${PROD_CLUSTER_NAMESPACE}
     type: text
   - name: DEPLOYMENT_FILE
-    value: ./kubernetes/deployment.yaml
+    value: kubernetes/deployment.yaml
+    type: text
+  - name: CACHE_DEPLOYMENT_FILE
+    value: kubernetes/redis-deployment.yaml
     type: text
   - name: APP_URL
     value: undefined
@@ -226,4 +229,5 @@ stages:
       # ------------------
       # source: https://raw.githubusercontent.com/open-toolchain/commons/master/scripts/check_health.sh
       # Check liveness and readiness probes to confirm application is healthy
+      kubectl apply -f ${CACHE_DEPLOYMENT_FILE}
       source <(curl -sSL "https://raw.githubusercontent.com/open-toolchain/commons/master/scripts/check_health.sh")
