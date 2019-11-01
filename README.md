@@ -1,4 +1,4 @@
-# ![Icon](./.bluemix/secure-lock-kubernetes.png) Develop a Kubernetes app
+# ![Icon](./.bluemix/secure-lock-kubernetes.png) ハンズオン用ツールチェーン
 
 
 ### Continuously deliver a secure container app to a Kubernetes Cluster
