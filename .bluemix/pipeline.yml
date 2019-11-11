@@ -210,7 +210,9 @@ stages:
       # image registry (using an IBM Cloud API Key), perform a kubectl deploy of container image and check on outcome.
       sed -i "s/__NAMESPACE__/${CLUSTER_NAMESPACE}/g" ${DEPLOYMENT_FILE}
       sed -i "s#__IMAGENAME__#${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}#g" ${DEPLOYMENT_FILE}
-      kubectl apply -f ${CACHE_DEPLOYMENT_FILE} -n ${CLUSTER_NAMESPACE}
+      if [[ -e ${CACHE_DEPLOYMENT_FILE} ]];then
+        kubectl apply -f ${CACHE_DEPLOYMENT_FILE} -n ${CLUSTER_NAMESPACE}
+      fi
       source <(curl -sSL "https://raw.githubusercontent.com/open-toolchain/commons/master/scripts/check_and_deploy_kubectl.sh")
   - name: Check health
     type: deployer
